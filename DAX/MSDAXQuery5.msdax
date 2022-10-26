@@ -1,0 +1,41 @@
+EVALUATE 
+UNION 
+( 
+	TOPN 
+	( 
+		5,
+		FILTER 
+		(
+			SUMMARIZECOLUMNS 
+			( 
+				'Date'[Year], 
+				'Date'[Month], 
+				'Author'[NameAndSurname], 
+				"Number of book copies sold", 'Book_sale'[Number of book copies sold], 
+				"Number of book copies sold prev month", CALCULATE([Number of book copies sold], PREVIOUSMONTH('Date'[Date])) 
+			),
+			'Date'[Year] = "2015" && 'Date'[Month] = "May"
+		), 
+		'Book_sale'[Number of book copies sold], 
+		DESC 
+	) ,
+	TOPN 
+	( 
+		5,
+		FILTER 
+		(
+			SUMMARIZECOLUMNS 
+			( 
+				'Date'[Year], 
+				'Date'[Month], 
+				'Author'[NameAndSurname], 
+				"Number of book copies sold", 'Book_sale'[Number of book copies sold], 
+				"Number of book copies sold prev month", CALCULATE([Number of book copies sold], PREVIOUSMONTH('Date'[Date])) 
+			),
+			'Date'[Year] = "2015" && 'Date'[Month] = "April"
+		),
+		'Book_sale'[Number of book copies sold],
+		DESC 
+	) 
+)
+ORDER BY'Date'[Month] DESC, 'Book_sale'[Number of book copies sold] DESC

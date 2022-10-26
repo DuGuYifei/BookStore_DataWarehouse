@@ -1,0 +1,7 @@
+EVALUATE 
+SUMMARIZECOLUMNS 
+( 
+	'Seller'[EmploymentPosition], 
+	'Seller'[WorkExperience], 
+	"Profit", [Sale profit] 
+)

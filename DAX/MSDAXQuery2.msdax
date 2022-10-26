@@ -1,0 +1,13 @@
+EVALUATE 
+SUMMARIZECOLUMNS 
+( 
+	'Date'[Month], 
+	FILTER('Date', 'Date'[Year] = "2015" && 'Date'[Month] = "May" && 'Date'[BeforeHolidayDay] <> "the next day was ordinary day"), 
+	"Number of book copies sold", [Number of book copies sold], 
+	"Number of book copies sold prev month", CALCULATE
+		(
+			[Number of book copies sold], 
+			PREVIOUSMONTH('Date'[Date]), 
+			KEEPFILTERS('Date'[BeforeHolidayDay] <> "the next day was ordinary day")
+		) 
+)

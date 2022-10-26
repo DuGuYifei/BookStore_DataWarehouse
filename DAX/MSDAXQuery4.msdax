@@ -1,0 +1,16 @@
+DEFINE 
+	MEASURE 'Book_sale'[Sale profit prev month] = 
+		CALCULATE
+		(
+			[Sale profit], PREVIOUSMONTH('Date'[Date])
+		) 
+EVALUATE 
+SUMMARIZECOLUMNS 
+( 
+	'Date'[Month], 
+	'Seller'[NameAndSurname], 
+	FILTER('Date', 'Date'[Year] = "2015" && 'Date'[Month] = "May"), 
+	"Number of book copies sold", [Sale profit], 
+	"Number of book copies sold prev month", [Sale profit prev month] 
+)
+ORDER BY'Seller'[NameAndSurname]

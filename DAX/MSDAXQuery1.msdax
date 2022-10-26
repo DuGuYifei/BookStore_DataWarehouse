@@ -1,0 +1,10 @@
+EVALUATE 
+SUMMARIZECOLUMNS 
+( 
+	'Date'[Month], 
+	'Book'[Genre], 
+	FILTER('Date', 'Date'[Year] = "2015" && 'Date'[Month] = "May"), 
+	"Number of book copies sold", [Number of book copies sold], 
+	"Number of book copies sold prev month", CALCULATE([Number of book copies sold], PREVIOUSMONTH('Date'[Date])) 
+)
+ORDER BY 'Book'[Genre]
